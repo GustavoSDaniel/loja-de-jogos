@@ -1,1 +1,16 @@
+spring:
+  datasource:                         # Configurações do banco de dados (DataSource)
+    url: jdbc:postgresql://localhost:5433/loja_de_jogos_app_db  # URL de conexão com o banco PostgreSQL (host:porta(essa porta é a que foi configurada no docker)/nome_do_banco)
+    username: username                # Nome do usuário para acessar o banco
+    password: password                # Senha correspondente ao usuário
+    driver-class-name: org.postgresql.Driver  # Classe do driver JDBC usada para conectar ao PostgreSQL
 
+  jpa:                                # Configurações relacionadas ao JPA (Hibernate)
+    hibernate:
+      ddl-auto: create-drop           # Gera automaticamente o schema: cria ao iniciar e apaga ao parar o app (ideal para testes/dev)
+    show-sql: true                    # Exibe os comandos SQL no console/log ao rodar a aplicação
+    properties:
+      hibernate:
+        format_sql: true             # Exibe o SQL formatado (indentado) no log para facilitar leitura
+    database: postgresql              # Tipo de banco de dados usado (opcional, mas ajuda o Spring em algumas auto-configurações)
+    database-platform: org.hibernate.dialect.PostgreSQLDialect  # Dialeto do Hibernate usado para gerar SQL compatível com PostgreSQL

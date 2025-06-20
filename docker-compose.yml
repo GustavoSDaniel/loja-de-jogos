@@ -1,0 +1,17 @@
+services:
+  postgres:
+    container_name: postgres-lg-app # Nome do container
+    image: postgres:17.5 # Versão da imagem do PostgreSQL
+    environment:
+      POSTGRES_USER: username # Usuário padrão
+      POSTGRES_PASSWORD: password # Senha do usuário
+      PGDATA: /var/lib/postgresql/data # Define onde o PostgreSQL irá salvar os dados do banco dentro do container (é o diretório padrão)
+      POSTGRES_DB: loja_de_jogos_app_db # Banco que será criado
+    volumes:
+      - postgres:/var/lib/postgresql/data # Volume persistente
+    ports:
+      - 5433:5432 # Mapeia a porta 5432 do container para a porta 5433 da máquina host (acesso ao PostgreSQL de fora do container)
+
+volumes:
+  postgres:
+    driver: local # Volume local padrão do Docker

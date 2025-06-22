@@ -31,7 +31,8 @@ public class Game extends BaseEntity {
     @OneToMany(mappedBy = "game") // UM jogo para MUITOS comentarios
     private List<Comment> comments;
 
-    @ManyToMany() // quando é MANYTOMANY sempre sera uma lista nas duas entidades
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // quando é MANYTOMANY sempre sera uma lista nas duas entidades
+    // CascadeType.PERSIST É QUANDO EU ADICIONO UM ITEM A LISTA E  CascadeType.MERGE SERVE PARA ATUALIZAR A LISTA
     @JoinTable(
             name = "game_whishList",
             joinColumns = {
@@ -42,4 +43,22 @@ public class Game extends BaseEntity {
             }
     ) //TEM QUE SER NA ENTIDADE QUE NÃO CONTEM O mappedBy
     private List<WhishList> whishLists;
+
+
+
+    //ESSES METEDOS SERVE PARA RELACIONAMENTOS DE MUITOS PARA MUITOS QUANDOP QUISER ADICIONAR OU REMOVER UM ITEM DA LISTA
+    // TEM QUE SER NA ENTIDADE QUE NÃO ESTA COM O @mappedBy
+
+    public void addWhishList(WhishList whishList) {
+
+        whishList.getGames().add(this);
+        this.whishLists.add(whishList);
+
+    }
+
+    public void removeWhishList(WhishList whishList) {
+
+        whishList.getGames().remove(this);
+        this.whishLists.remove(whishList);
+    }
 }

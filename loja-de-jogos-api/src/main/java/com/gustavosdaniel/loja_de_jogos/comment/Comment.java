@@ -1,13 +1,11 @@
 package com.gustavosdaniel.loja_de_jogos.comment;
 
 import com.gustavosdaniel.loja_de_jogos.common.BaseEntity;
-import com.gustavosdaniel.loja_de_jogos.game.Game;
+import com.gustavosdaniel.loja_de_jogos.game.GameEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.List;
 
 @Setter
 @NoArgsConstructor
@@ -19,5 +17,5 @@ public class Comment extends BaseEntity {
 
     @ManyToOne//MUITOS comentarios dentro de  UMA jogo
     @JoinColumn(name = "id_game") // NOME NA TABELA DO BANCO DE DADOS sem o joincolumn seria comment_id
-    private Game game;
+    private GameEntity game;
 }

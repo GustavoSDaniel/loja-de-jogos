@@ -1,6 +1,6 @@
 package com.gustavosdaniel.loja_de_jogos.game;
 
-import com.gustavosdaniel.loja_de_jogos.category.Category;
+import com.gustavosdaniel.loja_de_jogos.category.CategoryEntity;
 import com.gustavosdaniel.loja_de_jogos.comment.Comment;
 import com.gustavosdaniel.loja_de_jogos.common.BaseEntity;
 import com.gustavosdaniel.loja_de_jogos.whishlist.WhishList;
@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Game extends BaseEntity {
+public class GameEntity extends BaseEntity {
 
     private String title;
     @Enumerated(EnumType.STRING)
@@ -26,7 +26,7 @@ public class Game extends BaseEntity {
 
     @ManyToOne //MUITOS jogos dentro de  UMA categoria
     @JoinColumn(name = "id_category") // NOME NA TABELA DO BANCO DE DADOS sem o joincolumn seria category_id
-    private Category category;
+    private CategoryEntity category;
 
     @OneToMany(mappedBy = "game") // UM jogo para MUITOS comentarios
     private List<Comment> comments;

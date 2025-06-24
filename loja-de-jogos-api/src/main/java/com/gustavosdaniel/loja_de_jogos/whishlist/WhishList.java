@@ -2,7 +2,7 @@ package com.gustavosdaniel.loja_de_jogos.whishlist;
 
 
 import com.gustavosdaniel.loja_de_jogos.common.BaseEntity;
-import com.gustavosdaniel.loja_de_jogos.game.Game;
+import com.gustavosdaniel.loja_de_jogos.game.GameEntity;
 import com.gustavosdaniel.loja_de_jogos.user.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,7 +29,7 @@ public class WhishList extends BaseEntity {
 
     @ManyToMany(mappedBy = "whishLists", fetch = FetchType.EAGER) // quando é MANYTOMANY sempre sera uma lista nas duas entidades e uma delas precisa ter o mappedBy para não criar duas listas
     // fetch = FetchType.EAGER SEVE PARA CARREGAR TODA A LISTA
-    private List<Game> games;
+    private List<GameEntity> games;
 
 
 }

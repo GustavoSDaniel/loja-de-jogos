@@ -12,6 +12,8 @@ import java.util.List;
 public class PageResponse <T>{ // PAGINAÇÃO MELHORA NO DESEMPENHO POIS NÃO VAI PRECISAR BUSCAR TUDO DE UMA VEZ NO BANCO DE DADOS
 
     private List<T> content;
+    private int number;
+    private int size;
     private int totalElements;
     private int totalPages;
     private boolean isLast;

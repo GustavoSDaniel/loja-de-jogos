@@ -1,8 +1,10 @@
 package com.gustavosdaniel.loja_de_jogos.game;
 
-import com.gustavosdaniel.loja_de_jogos.category.CategoryEntity;
+import com.gustavosdaniel.loja_de_jogos.category.Category;
 import com.gustavosdaniel.loja_de_jogos.comment.Comment;
 import com.gustavosdaniel.loja_de_jogos.common.BaseEntity;
+import com.gustavosdaniel.loja_de_jogos.platform.Console;
+import com.gustavosdaniel.loja_de_jogos.platform.Platform;
 import com.gustavosdaniel.loja_de_jogos.whishlist.WhishList;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,16 +19,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class GameEntity extends BaseEntity {
+public class Game extends BaseEntity {
 
     private String title;
-    @Enumerated(EnumType.STRING)
-    private SupportedPlatforms supportedPlatforms;
+
+    @ManyToMany(fetch = FetchType.EAGER) // Quando você carrega um Game, todas as Platforms relacionadas são carregadas imediatamente
+    private List<Platform> platforms;
+
     private String coverPicture;
 
     @ManyToOne //MUITOS jogos dentro de  UMA categoria
     @JoinColumn(name = "id_category") // NOME NA TABELA DO BANCO DE DADOS sem o joincolumn seria category_id
-    private CategoryEntity category;
+    private Category category;
 
     @OneToMany(mappedBy = "game") // UM jogo para MUITOS comentarios
     private List<Comment> comments;

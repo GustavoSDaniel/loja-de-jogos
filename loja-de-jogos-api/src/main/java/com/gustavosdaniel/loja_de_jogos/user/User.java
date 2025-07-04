@@ -1,7 +1,7 @@
 package com.gustavosdaniel.loja_de_jogos.user;
 
 import com.gustavosdaniel.loja_de_jogos.common.BaseEntity;
-import com.gustavosdaniel.loja_de_jogos.gamerequest.GameRequest;
+import com.gustavosdaniel.loja_de_jogos.gamerequest.GameRequestEntity;
 import com.gustavosdaniel.loja_de_jogos.notification.Notification;
 import com.gustavosdaniel.loja_de_jogos.whishlist.WhishList;
 import jakarta.persistence.*;
@@ -34,5 +34,5 @@ public class User extends BaseEntity {
     private List<Notification> notifications;
 
     @OneToMany(mappedBy = "user") // UM usuario faz MUITAS requisições de jogos
-    private List<GameRequest> gameRequests;
+    private List<GameRequestEntity> gameRequests;
 }

@@ -21,6 +21,7 @@ import java.util.List;
 @Entity
 public class Game extends BaseEntity {
 
+    @Column(nullable = false, unique = true)
     private String title;
 
     @ManyToMany(fetch = FetchType.EAGER) // Quando você carrega um Game, todas as Platforms relacionadas são carregadas imediatamente
@@ -50,7 +51,7 @@ public class Game extends BaseEntity {
 
 
 
-    //ESSES METEDOS SERVE PARA RELACIONAMENTOS DE MUITOS PARA MUITOS QUANDOP QUISER ADICIONAR OU REMOVER UM ITEM DA LISTA
+    //ESSES METEDOS SERVE PARA RELACIONAMENTOS DE MUITOS PARA MUITOS QUANDO QUISER ADICIONAR OU REMOVER UM ITEM DA LISTA
     // TEM QUE SER NA ENTIDADE QUE NÃO ESTA COM O @mappedBy
 
     public void addWhishList(WhishList whishList) {

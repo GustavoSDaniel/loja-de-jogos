@@ -11,7 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor // ESSA ANOTAÇÃO CRIA CONSTRUTORES SO QUE COM FINAL facilitando a injeção de dependencias
 public class GameService {
 
-    public String saveGame(GameRequest gameRequest) {
+    private final GameRepository gameRepository;
+    private final GameMapper gameMapper;
+
+    public String saveGame(final GameRequest gameRequest) { // o FINAL garante que o objeto não seja alterado
 
         return null;
 

@@ -26,7 +26,10 @@ public class Game extends BaseEntity {
     @Column(nullable = false, unique = true)
     private String title;
 
-    @ManyToMany(fetch = FetchType.EAGER) // Quando você carrega um Game, todas as Platforms relacionadas são carregadas imediatamente
+    // FetchType.EAGER Quando você carrega um Game, todas as Platforms relacionadas são carregadas imediatamente
+    // CascadeType.MERGE para mesclar as informações no banco de dados
+    // CascadeType.PERSIST caso queira adicionar algum novo (no caso algum console novo)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private List<Platform> platforms;
 
     private String coverPicture;
@@ -67,5 +70,15 @@ public class Game extends BaseEntity {
 
         whishList.getGames().remove(this);
         this.whishLists.remove(whishList);
+    }
+
+    public void addPlatform(Platform platform) {
+        this.platforms.add(platform); // Quando eu adiciono um sole
+        platform.getGames().add(this); // eu informo que posso adicionar jogos nesse console
+    }
+
+    public void removePlatform(Platform platform) {
+        this.platforms.remove(platform); // quando eu removo a plataforma
+        platform.getGames().remove(this); // esses jogos tbm tem que ser removidos
     }
 }

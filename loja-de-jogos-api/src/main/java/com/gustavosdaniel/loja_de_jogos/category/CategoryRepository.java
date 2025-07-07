@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface CategoryRepository extends JpaRepository<Category, String> {
 
     // BUSCA PELO NOME PELO COMEÇO DA PALAVRA E IGNORA SE TA EM MAIUSCULO OU MINUSCULO
     List<Category> findByNameStartingWithIgnoreCaseOrderByNameAsc(String name);

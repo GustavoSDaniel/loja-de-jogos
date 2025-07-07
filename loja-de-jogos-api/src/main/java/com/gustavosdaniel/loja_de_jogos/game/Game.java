@@ -11,6 +11,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@SuperBuilder //permite que você use o padrão Builder de forma fluida em uma hierarquia de classes (superclasses e subclasses)
 public class Game extends BaseEntity {
 
     @Column(nullable = false, unique = true)

@@ -8,7 +8,11 @@ import com.gustavosdaniel.loja_de_jogos.platform.PlatformRepository;
 import lombok.RequiredArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
@@ -27,6 +31,7 @@ public class GameService {
     private final GameMapper gameMapper;
     private final PlatformRepository platformRepository;
     private final CategoryRepository categoryRepository;
+    private final RestClient.Builder builder;
 
     public String saveGame(final GameRequest gameRequest) { // o FINAL garante que o objeto não seja alterado
 
@@ -118,8 +123,21 @@ public class GameService {
 
     public PageResponse<GameResponse> findAllGames(int page, int size) {
 
-        return null;
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Game> gamesPage = gameRepository.findAll(pageable);
+        List<GameResponse> gameResponses = gamesPage.stream()
+                .map(this.gameMapper::toGameResponse)
+                .toList();
 
+        return PageResponse.<GameResponse>builder()
+                .content(gameResponses)
+                .pageNumber(gamesPage.getNumber())
+                .size(gamesPage.getSize())
+                .totalElements(gamesPage.getTotalElements())
+                .totalPages(gamesPage.getTotalPages())
+                .isFirst(gamesPage.isFirst())
+                .isLast(gamesPage.isLast())
+                .build();
     }
 
     public void deleteGame(String gameId) {

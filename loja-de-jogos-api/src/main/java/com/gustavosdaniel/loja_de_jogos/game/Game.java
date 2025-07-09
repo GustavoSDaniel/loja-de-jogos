@@ -38,7 +38,7 @@ public class Game extends BaseEntity {
     @JoinColumn(name = "id_category") // NOME NA TABELA DO BANCO DE DADOS sem o joincolumn seria category_id
     private Category category;
 
-    @OneToMany(mappedBy = "game") // UM jogo para MUITOS comentarios
+    @OneToMany(mappedBy = "game", orphanRemoval = true) // UM jogo para MUITOS comentarios , orphanRemoval = Caso o jogo seja apagado todos os comentarios tbm seram
     private List<Comment> comments;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}) // quando é MANYTOMANY sempre sera uma lista nas duas entidades
